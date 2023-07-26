@@ -12,7 +12,7 @@ In this case, you may want to save as a PDF to ensure your formatting remains in
 Part 1: Yelp Dataset Profiling and Understanding
 
 1. Profile the data by finding the total number of records for each of the tables below:
-	
+```	
 i. Attribute table =10000
 ii. Business table = 10000
 iii. Category table = 10000
@@ -24,12 +24,12 @@ viii. photo table = 10000
 ix. review table = 10000
 x. tip table = 10000
 xi. user table =10000
-	
+```	
 
 
 2. Find the total distinct records by either the foreign key or primary key for each table. If two foreign keys are listed in the table, please specify which foreign key.
-
-    i.   Business    =  id             			10000
+```
+    	i.   Business    =  id             			10000
 	ii.  Hours       =  business_id    			1562
 	iii. Category    =  business_id    			2643
 	iv.  Attribute   =  business_id	 			1115
@@ -40,11 +40,11 @@ xi. user table =10000
 	ix.  User        = 	id						10000
 	x.   Friend      = 	user_id					11
 	xi.  Elite_years =	user_id 				2780
-
+```
 Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.	
   
   SELECT COUNT ( DISTINCT (Key) )from table ( General format)
-
+```
   SELECT COUNT (distinct id ) from business
 	  SELECT COUNT (distinct business_id ) from hours
 	  SELECT COUNT (distinct business_id ) from Category
@@ -57,7 +57,7 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 	  SELECT COUNT (distinct id ) from User
 	  SELECT COUNT (distinct user_id ) from Friend
 	  SELECT COUNT (distinct user_id ) from Elite_yers	  
-
+```
 
 3. Are there any columns with null values in the Users table? Indicate "yes," or "no."
 
@@ -65,7 +65,7 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 	
 	
 	SQL code used to arrive at answer:
-	
+```	
 	SELECT COUNT(* ) from User
 		where id is NULL OR
 			  name is NULL OR
@@ -87,19 +87,19 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 			  compliment_funny IS NULL OR 
 			  compliment_writer IS NULL OR 
 			  compliment_photos IS NULL
-
+```
 	
 4. For each table and column listed below, display the smallest (minimum), largest (maximum), and average (mean) value for the following fields:
 
-	i. Table: Review, Column: Stars
-
+i. Table: Review, Column: Stars
+```
 	SELECT min(stars),max(stars), avg(stars) from Review
 
 		min:		max:		avg:
 		 1			 5			3.7082
-		
+```		
 	
-	ii. Table: Business, Column: Stars
+ii. Table: Business, Column: Stars
 	
 	SELECT min(stars),max(stars), avg(stars) from Business
 
@@ -107,7 +107,7 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 		 1			 53			1.9414
 		
 	
-	iii. Table: Tip, Column: Likes
+iii. Table: Tip, Column: Likes
 	
 	SELECT min(likes),max(likes), avg(likes) from Tip
 	
@@ -115,15 +115,15 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 
 		
 	
-	iv. Table: Checkin, Column: Count
+iv. Table: Checkin, Column: Count
 	
 	SELECT min(count),max(count), avg(count) from Checkin
 
 		min:		max:		avg:
 		 1			 53			1.9414
 	
-	v. Table: User, Column: Review_count
-
+v. Table: User, Column: Review_count
+   
 	SELECT min(Review_count),max(Review_count), avg(Review_count) from User
 	
 		 0			2000		24.2995
@@ -133,13 +133,14 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 5. List the cities with the most reviews in descending order:
 
 	SQL code used to arrive at answer:
-	
+```
 	SELECT city,sum(review_count) as reviews 
 		FROM business
 		Group By city
 		Order By reviews desc	
-
-	Copy and Paste the Result Below:
+```
+Copy and Paste the Result Below:
+```
 +-----------------+---------+
 | city            | reviews |
 +-----------------+---------+
@@ -170,7 +171,8 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 | Goodyear        |    1155 |
 +-----------------+---------+
 (Output limit exceeded, 25 of 362 total rows shown)
-	
+
+```	
 6. Find the distribution of star ratings to the business in the following cities:
 
 i. Avon
@@ -182,6 +184,7 @@ SQL code used to arrive at answer:
 		Group By stars
 
 Copy and Paste the Resulting Table Below (2 columns – star rating and count):
+```
 +-------+-------------------+
 | stars | sum(review_count) |
 +-------+-------------------+
@@ -192,7 +195,7 @@ Copy and Paste the Resulting Table Below (2 columns – star rating and count):
 |   4.5 |                31 |
 |   5.0 |                 3 |
 +-------+-------------------+
-
+```
 ii. Beachwood
 
 SQL code used to arrive at answer:
@@ -218,12 +221,12 @@ Copy and Paste the Resulting Table Below (2 columns – star rating and count):
 7. Find the top 3 users based on their total number of reviews:
 		
 	SQL code used to arrive at answer:
-
+```
 	SELECT id, name , review_count from user
 		Order By review_count desc
 		Limit 3
-		
-	Copy and Paste the Result Below:
+```
+Copy and Paste the Result Below:
 		
 		+------------------------+--------+--------------+
 		| id                     | name   | review_count |
@@ -284,7 +287,7 @@ Copy and Paste the Resulting Table Below (2 columns – star rating and count):
 
 	
 	SQL code used to arrive at answer:
-
+```
 	SELECT 	count(*) as hatecount from review			SELECT 	count(*) as lovecount from review
 		Where text LIKE "%hate%"                            		Where text LIKE "%love%"
 		+-----------+							  +-----------+
@@ -292,11 +295,11 @@ Copy and Paste the Resulting Table Below (2 columns – star rating and count):
 		+-----------+							  +-----------+
 		|       232 |							  |      1780 |
 		+-----------+							  +-----------+
-	
+```	
 10. Find the top 10 users with the most fans:
 
 	SQL code used to arrive at answer:
-	
+	```
 	SELECT id, name ,fans
 		FROM user 
 		Order By fans desc
@@ -326,8 +329,7 @@ Part 2: Inferences and Analysis
 	
 i. Do the two groups you chose to analyze have a different distribution of hours?
 
-Yes ,they do have different distribution hours. For example for the restaurant category in the Phoenix city , the one with 2-3 star
-ratings operates for longer hoursthan the one with 4-5 star ratings.
+Yes ,they do have different distribution hours. For example for the restaurant category in the Phoenix city , the one with 2-3 star ratings operates for longer hoursthan the one with 4-5 star ratings.
 
 
 ii. Do the two groups you chose to analyze have a different number of reviews?
@@ -339,7 +341,7 @@ iii. Are you able to infer anything from the location data provided between thes
 No, I wasn't able to infer anything since two groups had different zipcodes
 
 SQL code used for analysis:
-
+```
 SELECT B.name ,
               	       C.category,
 		       B.city, 
@@ -356,7 +358,7 @@ SELECT B.name ,
 		Where city = 'Phoenix' and category = 'Restaurants' and rating in ('2-3 stars','4-5 stars')
 		Group By name
 		Order By stars desc		
-		
+```		
 2. Group business based on the ones that are open and the ones that are closed. What differences can you find between the ones that are still open and the ones that are closed? List at least two differences and the SQL code you used to arrive at your answer.
 		
 i. Difference 1:
@@ -370,7 +372,7 @@ average review count is higher for the business that are open
                 
          
 SQL code used for analysis:
-
+```
 SELECT count(distinct id), 
 			   count(distinct city),
 			   avg(stars), 
@@ -378,70 +380,66 @@ SELECT count(distinct id),
 			   is_open
 		From business
 		Broup By is_open	
-	
+```	
 3. For this last part of your analysis, you are going to choose the type of analysis you want to conduct on the Yelp dataset and are going to prepare the data for analysis.
 
 Ideas for analysis include: Parsing out keywords and business attributes for sentiment analysis, clustering businesses to find commonalities or anomalies between them, predicting the overall star rating for a business, predicting the number of fans a user will have, and so on. These are just a few examples to get you started, so feel free to be creative and come up with your own problem you want to solve. Provide answers, in-line, to all of the following:
 	
 i. Indicate the type of analysis you chose to do:
          
-I chose to analyse whether the businesses like restaurants having the arrtibutes like 'goodforkids' ,'alcohol' and 'free wifi'  
-	   relate to the number of stars or the review counts that they get. I chose particulrly  the state 'Arizona'  as this state  has more 
-	   number of restaurants, has the review counts ranging from  the least to the highest and the ratings from 2 to 4.5 stars, more restaurants increase possibility for effective analysis. 
+I chose to analyse whether the businesses like restaurants having the arrtibutes like 'goodforkids' ,'alcohol' and 'free wifi' relate to the number of stars or the review counts that they get. I chose particulrly  the state 'Arizona'  as this state  has more number of restaurants, has the review counts ranging from  the least to the highest and the ratings from 2 to 4.5 stars, more restaurants increase possibility for effective analysis. 
 
-ii. Write 1-2 brief paragraphs on the type of data you will need for your analysis and why you chose that data:
-                           
-    I used 3 tables like business, category and attribute for my analysis. 
-	I chose the business name ,their catagory , the state in which they are run , the attributes they have, their ratings and their count of
-	reviews. I took varibles like  
+ii. Write 1-2 brief paragraphs on the type of data you will need for your analysis and why you chose that data:                     
+I used 3 tables like business, category and attribute for my analysis. 
+I chose the business name ,their catagory , the state in which they are run , the attributes they have, their ratings and their count of reviews. I took varibles like :	
+
+1)name, state, stars , review_count from  the table business, 
+2)category from the table category and
+3)name ,value from the attribute table.
 	
-	1)name, state, stars , review_count from  the table business, 
-	2)category from the table category and
-	3)name ,value from the attribute table.
-	
-	To connect all the 3 tables. I used the primary keys like id from business, business_id from category and 
-	business_id from attribute table.
+To connect all the 3 tables. I used the primary keys like id from business, business_id from category and 
+business_id from attribute table.
                  
-	I wanted to know having a free wifi or restaurents good for kids or having full-bar or having any combination of 2 or all the attributes 
-	contributes to good rating or having more reviews in particular.       
+I wanted to know having a free wifi or restaurents good for kids or having full-bar or having any combination of 2 or all the attributes contributes to good rating or having more reviews in particular.       
 
 iii. Output of your finished dataset:
+```
++----------------------------------------+-------------+---------------+-------+-------+--------------+
+| name                                   | name        | value         | state | stars | review_count |
++----------------------------------------+-------------+---------------+-------+-------+--------------+
+| Charlie D's Catfish & Chicken          | Alcohol     | none          | AZ    |   4.5 |            7 |
+| Charlie D's Catfish & Chicken          | WiFi        | no            | AZ    |   4.5 |            7 |
+| Charlie D's Catfish & Chicken          | GoodForKids | 1             | AZ    |   4.5 |            7 |
+| Bootleggers Modern American Smokehouse | Alcohol     | full_bar      | AZ    |   4.0 |          431 |
+| Bootleggers Modern American Smokehouse | WiFi        | no            | AZ    |   4.0 |          431 |
+| Bootleggers Modern American Smokehouse | GoodForKids | 1             | AZ    |   4.0 |          431 |
+| The Cider Mill                         | Alcohol     | full_bar      | AZ    |   4.0 |           91 |
+| The Cider Mill                         | WiFi        | no            | AZ    |   4.0 |           91 |
+| The Cider Mill                         | GoodForKids | 1             | AZ    |   4.0 |           91 |
+| Nabers Music, Bar & Eats               | Alcohol     | full_bar      | AZ    |   4.0 |           75 |
+| Senor Taco                             | Alcohol     | none          | AZ    |   3.5 |           83 |
+| Senor Taco                             | WiFi        | no            | AZ    |   3.5 |           83 |
+| Senor Taco                             | GoodForKids | 1             | AZ    |   3.5 |           83 |
+| Five Guys                              | Alcohol     | none          | AZ    |   3.5 |           63 |
+| Five Guys                              | WiFi        | no            | AZ    |   3.5 |           63 |
+| Five Guys                              | GoodForKids | 1             | AZ    |   3.5 |           63 |
+| Gallagher's                            | Alcohol     | full_bar      | AZ    |   3.0 |           60 |
+| Gallagher's                            | WiFi        | free          | AZ    |   3.0 |           60 |
+| Gallagher's                            | GoodForKids | 1             | AZ    |   3.0 |           60 |
+| Mango Flats                            | Alcohol     | beer_and_wine | AZ    |   2.5 |            5 |
+| Mango Flats                            | WiFi        | free          | AZ    |   2.5 |            5 |
+| Mango Flats                            | GoodForKids | 1             | AZ    |   2.5 |            5 |
+| Famous Sam's                           | Alcohol     | full_bar      | AZ    |   2.5 |            3 |
+| Famous Sam's                           | GoodForKids | 0             | AZ    |   2.5 |            3 |
+| McDonald's                             | Alcohol     | none          | AZ    |   2.0 |            8 |
+| McDonald's                             | WiFi        | free          | AZ    |   2.0 |            8 |
+| McDonald's                             | GoodForKids | 1             | AZ    |   2.0 |            8 |
++----------------------------------------+-------------+---------------+-------+-------+--------------+
 
-   +----------------------------------------+-------------+---------------+-------+-------+--------------+
-		| name                                   | name        | value         | state | stars | review_count |
-		+----------------------------------------+-------------+---------------+-------+-------+--------------+
-		| Charlie D's Catfish & Chicken          | Alcohol     | none          | AZ    |   4.5 |            7 |
-		| Charlie D's Catfish & Chicken          | WiFi        | no            | AZ    |   4.5 |            7 |
-		| Charlie D's Catfish & Chicken          | GoodForKids | 1             | AZ    |   4.5 |            7 |
-		| Bootleggers Modern American Smokehouse | Alcohol     | full_bar      | AZ    |   4.0 |          431 |
-		| Bootleggers Modern American Smokehouse | WiFi        | no            | AZ    |   4.0 |          431 |
-		| Bootleggers Modern American Smokehouse | GoodForKids | 1             | AZ    |   4.0 |          431 |
-		| The Cider Mill                         | Alcohol     | full_bar      | AZ    |   4.0 |           91 |
-		| The Cider Mill                         | WiFi        | no            | AZ    |   4.0 |           91 |
-		| The Cider Mill                         | GoodForKids | 1             | AZ    |   4.0 |           91 |
-		| Nabers Music, Bar & Eats               | Alcohol     | full_bar      | AZ    |   4.0 |           75 |
-		| Senor Taco                             | Alcohol     | none          | AZ    |   3.5 |           83 |
-		| Senor Taco                             | WiFi        | no            | AZ    |   3.5 |           83 |
-		| Senor Taco                             | GoodForKids | 1             | AZ    |   3.5 |           83 |
-		| Five Guys                              | Alcohol     | none          | AZ    |   3.5 |           63 |
-		| Five Guys                              | WiFi        | no            | AZ    |   3.5 |           63 |
-		| Five Guys                              | GoodForKids | 1             | AZ    |   3.5 |           63 |
-		| Gallagher's                            | Alcohol     | full_bar      | AZ    |   3.0 |           60 |
-		| Gallagher's                            | WiFi        | free          | AZ    |   3.0 |           60 |
-		| Gallagher's                            | GoodForKids | 1             | AZ    |   3.0 |           60 |
-		| Mango Flats                            | Alcohol     | beer_and_wine | AZ    |   2.5 |            5 |
-		| Mango Flats                            | WiFi        | free          | AZ    |   2.5 |            5 |
-		| Mango Flats                            | GoodForKids | 1             | AZ    |   2.5 |            5 |
-		| Famous Sam's                           | Alcohol     | full_bar      | AZ    |   2.5 |            3 |
-		| Famous Sam's                           | GoodForKids | 0             | AZ    |   2.5 |            3 |
-		| McDonald's                             | Alcohol     | none          | AZ    |   2.0 |            8 |
-		| McDonald's                             | WiFi        | free          | AZ    |   2.0 |            8 |
-		| McDonald's                             | GoodForKids | 1             | AZ    |   2.0 |            8 |
-		+----------------------------------------+-------------+---------------+-------+-------+--------------+
-		      
+```		      
          
 iv. Provide the SQL code you used to create your final dataset:
-
+```
 select b.name as business, 
 					a.name as attribute,
 					a.value,
